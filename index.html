@@ -1,73 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pirâmide de TriTri</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pirâmide de TriTri</title>
-</head>
+  <body>
+    <h1>Pirâmide de TriTri</h1>
 
-<body>
-  <h1>Pirâmide de TriTri</h1>
+    <form action="">
+      <label for="QntNumeroLinhas">Numero de linhas</label>
+      <input
+        type="number"
+        name="Numero de linhas"
+        id="numberqnt"
+        max="30"
+        min="1"
+      />
+      <button type="submit">Enviar</button>
+    </form>
 
-  <form action="">
-    <label for="QntNumeroLinhas">Numero de linhas</label>
-    <input type="number" name="Numero de linhas" id="numberqnt" max="30" min="1" />
-    <button type="submit">Iniciar</button>
-  </form>
+    <div class="piramide"></div>
 
-  <div class="piramide">
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        iniciar();
+      });
 
-  </div>
+      function iniciar() {
+        document.querySelector(".piramide").innerHTML = "";
 
-  <script>
-    const FormT = document.querySelector("form");
-    FormT.setAttribute("onclick", "iniciar()");
+        var degrau = "1";
+        const ObjInput = document.querySelector("#numberqnt");
+        var qntLinhas = ObjInput.value;
 
-    function iniciar() {
-      document.querySelector(".piramide").innerHTML = "";
-      var linha = "1";
-      const ObjInput = document.querySelector("#numberqnt");
-      var qntLinhas = ObjInput.value;
-      for (let i = 0; i < qntLinhas; i++) {
-        let p = document.createElement("p");
-        p.innerText = linha;
-        document.querySelector(".piramide").appendChild(p);
-        linha = CriarLinha(linha);
+        for (let i = 0; i < qntLinhas; i++) {
+          let p = document.createElement("p");
+          p.innerText = degrau;
+          document.querySelector(".piramide").appendChild(p);
+          degrau = CriarLinha(degrau);
+        }
       }
-    }
 
-    function CriarLinha(linha) {
-      var qnt = 1;
-      var concatenada = "";
-      var linhaFinal = "";
-      var total = 0;
+      function CriarLinha(linha) {
+        var Quantidade = 1;
+        var StringConcatenada = "";
+        var linhaFinal = "";
+        var QuantidadeString = "";
+        var total = 0;
 
-      if (linha.length == 1) {
-        total += parseInt(linha[0]) * qnt;
-        qnt = 1;
-        let Stringqnt = String(qnt);
-        concatenada = Stringqnt + linha[0];
-        linhaFinal += concatenada;
+        if (linha.length == 1) {
+          total += parseInt(linha[0]) * Quantidade;
+          Quantidade = 1;
+          QuantidadeString = String(Quantidade);
+          StringConcatenada = QuantidadeString + linha[0];
+          linhaFinal += StringConcatenada;
+          return linhaFinal;
+        }
+
+        for (let i = 0; i < linha.length; i++) {
+          if (linha[i] == linha[i + 1]) {
+            Quantidade++;
+          } else if (linha[i] != linha[i + 1]) {
+            total += parseInt(linha[i]) * Quantidade;
+            QuantidadeString = String(Quantidade);
+            StringConcatenada = QuantidadeString + linha[i];
+            linhaFinal += StringConcatenada;
+            Quantidade = 1;
+          }
+        }
         return linhaFinal;
       }
-
-      for (let i = 0; i < linha.length; i++) {
-        if (linha[i] == linha[i + 1]) {
-          qnt++;
-        } else if (linha[i] != linha[i + 1]) {
-          total += parseInt(linha[i]) * qnt;
-          let Stringqnt = String(qnt);
-          concatenada = Stringqnt + linha[i];
-          linhaFinal += concatenada;
-          qnt = 1;
-        } 
-      }
-      return linhaFinal;
-    }
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
