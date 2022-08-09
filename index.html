@@ -19,7 +19,7 @@
         max="30"
         min="1"
       />
-      <button type="submit">Enviar</button>
+      <button type="submit">Iniciar</button>
     </form>
 
     <div class="piramide"></div>
@@ -64,13 +64,13 @@
 
         for (let i = 0; i < linha.length; i++) {
           if (linha[i] == linha[i + 1]) {
-            Quantidade++;
+            qnt++;
           } else if (linha[i] != linha[i + 1]) {
-            total += parseInt(linha[i]) * Quantidade;
-            QuantidadeString = String(Quantidade);
-            StringConcatenada = QuantidadeString + linha[i];
-            linhaFinal += StringConcatenada;
-            Quantidade = 1;
+            total += parseInt(linha[i]) * qnt;
+            let Stringqnt = String(qnt);
+            concatenada = Stringqnt + linha[i];
+            linhaFinal += concatenada;
+            qnt = 1;
           }
         }
         return linhaFinal;
